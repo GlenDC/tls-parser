@@ -623,7 +623,7 @@ fn parse_tls_handshake_msg_hello_request(i: &[u8]) -> IResult<&[u8], TlsMessageH
     Ok((i, TlsMessageHandshake::HelloRequest))
 }
 
-fn parse_tls_handshake_msg_client_hello(i: &[u8]) -> IResult<&[u8], TlsMessageHandshake> {
+pub fn parse_tls_handshake_msg_client_hello(i: &[u8]) -> IResult<&[u8], TlsMessageHandshake> {
     let (i, version) = be_u16(i)?;
     let (i, random) = take(32usize)(i)?;
     let (i, sidlen) = verify(be_u8, |&n| n <= 32)(i)?;
